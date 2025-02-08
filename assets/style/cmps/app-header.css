@@ -1,0 +1,14 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: var(--clr1);
+    color: var(--clr1bg);
+    padding-block: 1em;
+}
+
+.app-nav {
+    display: flex;
+    gap: 10px;
+}
