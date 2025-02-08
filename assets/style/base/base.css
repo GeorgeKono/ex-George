@@ -29,7 +29,13 @@ a {
   color: unset;
 }
 
+ul {
+  list-style-type: none;
+}
 
+li {
+  text-decoration: none;
+}
 
 /* Dont stretch my Media */
 img,

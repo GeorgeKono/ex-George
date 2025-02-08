@@ -1,3 +1,4 @@
+import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
 
 const { useState, useEffect, useRef } = React
@@ -17,9 +18,11 @@ export function BookIndex() {
         })
     }
     
+    if (!books) return 'Loading data...'
+
     return (
         <section className="book-index">
-            <h1>Book index!</h1>
+            <BookList books = {books} />
         </section>
     )
 }
