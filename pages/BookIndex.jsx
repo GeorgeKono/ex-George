@@ -1,3 +1,4 @@
+import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
 import { BookDetails } from "./BookDetails.jsx"
@@ -29,12 +30,19 @@ export function BookIndex() {
         setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)))
     }
 
+    function onUpdateFilter(filter) {
+        setFilter(filter)
+    }
+
     if (!books) return 'Loading data...'
 
     return (
         <section className="book-index">
-            {selectedBookId ? <BookDetails onSelectBook={onSelectBook} selectedBookId={selectedBookId} /> :
-            <BookList books = {books} onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} />}
+            {selectedBookId ? <BookDetails onSelectBook={onSelectBook} selectedBookId={selectedBookId} /> : 
+            <React.Fragment>
+                <BookFilter onUpdateFilter = {onUpdateFilter} filter={filter} />
+                <BookList books = {books} onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} />
+            </React.Fragment>}
         </section>
     )
 }
