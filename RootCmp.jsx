@@ -18,7 +18,7 @@ export function App() {
             <AppHeader onSetPage={onSetPage}/>
 
             <main className="main-layout">
-                {page === 'home' && <Home />}
+                {page === 'home' && <Home onSetPage={onSetPage}/>}
                 {page === 'about' && <About />}
                 {page === 'book' && <BookIndex />}
             </main>
