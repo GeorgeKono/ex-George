@@ -30,6 +30,14 @@ export function BookDetails({onSelectBook, selectedBookId}) {
         return publishedYear
     }
 
+    function getPageCount() {
+        let pageCount = book.pageCount
+        if (pageCount > 500) pageCount += ' - Long reading'
+        else if (pageCount > 200) pageCount += ' - Descent reading'
+        else if (pageCount < 100) pageCount += ' - Light reading'
+        return pageCount
+    }
+
     function loadBook() {
         bookService.get(selectedBookId).then(book => setBook(book))
     }
@@ -44,7 +52,7 @@ export function BookDetails({onSelectBook, selectedBookId}) {
             <p><strong>Author(s):</strong> {book.authors.join(', ')}</p>
             <p><strong>Published:</strong> {getPublishDate()}</p>
             <p><strong>Category:</strong> {book.categories.join(', ')}</p>
-            <p><strong>Pages:</strong> {book.pageCount}</p>
+            <p><strong>Pages:</strong> {getPageCount()}</p>
             <p><strong>Language:</strong> {getBookLng(book.language)}</p>
             <p><strong>Price:</strong> {book.listPrice.amount} {book.listPrice.currencyCode}</p>
             {book.listPrice.isOnSale && <p className="sale">On Sale!</p>}
