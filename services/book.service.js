@@ -13,6 +13,7 @@ export const bookService = {
 
 const BOOK_KEY = 'bookDB'
 
+window.bs = bookService
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
