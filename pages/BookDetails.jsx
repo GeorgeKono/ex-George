@@ -10,6 +10,17 @@ export function BookDetails({onSelectBook, selectedBookId}) {
         loadBook()
     }, [book])
 
+    function getBookLng(lng) {
+        switch (lng) {
+            case 'he':
+                return 'Hebrew'
+            case 'sp':
+                return 'Spanish'
+            default:
+                return 'English'
+        }
+    }
+
     function loadBook() {
         bookService.get(selectedBookId).then(book => setBook(book))
     }
@@ -25,7 +36,7 @@ export function BookDetails({onSelectBook, selectedBookId}) {
             <p><strong>Published:</strong> {book.publishedDate}</p>
             <p><strong>Category:</strong> {book.categories.join(', ')}</p>
             <p><strong>Pages:</strong> {book.pageCount}</p>
-            <p><strong>Language:</strong> {book.language.toUpperCase()}</p>
+            <p><strong>Language:</strong> {getBookLng(book.language)}</p>
             <p><strong>Price:</strong> {book.listPrice.amount} {book.listPrice.currencyCode}</p>
             {book.listPrice.isOnSale && <p className="sale">On Sale!</p>}
 
