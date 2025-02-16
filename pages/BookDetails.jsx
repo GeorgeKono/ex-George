@@ -38,6 +38,13 @@ export function BookDetails({onSelectBook, selectedBookId}) {
         return pageCount
     }
 
+    function getPriceColor() {
+        let bookPrice = book.listPrice.amount
+        if (bookPrice > 150) return 'price-red'
+        else if (bookPrice < 20) return 'price-green'
+        return ''
+    }
+
     function loadBook() {
         bookService.get(selectedBookId).then(book => setBook(book))
     }
@@ -54,7 +61,7 @@ export function BookDetails({onSelectBook, selectedBookId}) {
             <p><strong>Category:</strong> {book.categories.join(', ')}</p>
             <p><strong>Pages:</strong> {getPageCount()}</p>
             <p><strong>Language:</strong> {getBookLng(book.language)}</p>
-            <p><strong>Price:</strong> {book.listPrice.amount} {book.listPrice.currencyCode}</p>
+            <p className={getPriceColor()}><strong>Price:</strong> {book.listPrice.amount} {book.listPrice.currencyCode}</p>
             {book.listPrice.isOnSale && <p className="sale">On Sale!</p>}
 
             <button onClick={() => onSelectBook(null)}>Back</button>
