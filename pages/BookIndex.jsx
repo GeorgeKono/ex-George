@@ -26,8 +26,9 @@ export function BookIndex() {
     }
 
     function onRemoveBook(bookId) {
-        bookService.remove(bookId).then(() => 
-        setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)))
+        bookService.remove(bookId)
+            .then(() => setBooks(prevBooks => 
+                prevBooks.filter(book => book.id !== bookId)))
     }
 
     function onUpdateFilter(filter) {
@@ -38,11 +39,18 @@ export function BookIndex() {
 
     return (
         <section className="book-index">
-            {selectedBookId ? <BookDetails onSelectBook={onSelectBook} selectedBookId={selectedBookId} /> : 
-            <React.Fragment>
-                <BookFilter onUpdateFilter = {onUpdateFilter} filter={filter} />
-                <BookList books = {books} onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} />
-            </React.Fragment>}
+            {selectedBookId ? (
+                <BookDetails onSelectBook={onSelectBook} selectedBookId={selectedBookId} />
+            ) : ( 
+                <React.Fragment>
+                    <BookFilter onUpdateFilter = {onUpdateFilter} filter={filter} />
+                    {books.length > 0 ? (
+                        <BookList books = {books} onRemoveBook={onRemoveBook} onSelectBook={onSelectBook} /> 
+                    ) : (
+                        <div>No books found...</div>
+                    )}
+                </React.Fragment>
+            )}
         </section>
     )
 }

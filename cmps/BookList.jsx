@@ -5,10 +5,13 @@ export function BookList({books, onRemoveBook, onSelectBook}) {
         <section className="book-list">
             <ul>
                 {books.map(book => 
-                <li key={book.id}>
+                <li key={book.id} className="book-card">
                     <BookPreview book = {book}/>
-                    <button onClick={() => onRemoveBook(book.id)}>Delete</button>
-                    <button onClick={() => onSelectBook(book.id)}>Details</button>
+
+                    <div className="book-card-buttons">
+                        <button onClick={() => onSelectBook(book.id)}>Details</button>
+                        <button onClick={() => onRemoveBook(book.id)}>Delete</button>
+                    </div>
                 </li>)}
             </ul>
         </section>
