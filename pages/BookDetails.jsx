@@ -21,6 +21,15 @@ export function BookDetails({onSelectBook, selectedBookId}) {
         }
     }
 
+    function getPublishDate() {
+        const currYear = new Date().getFullYear()
+        let publishedYear = book.publishedDate
+        let diff = currYear - publishedYear
+        if (diff > 10) publishedYear += ' - Vintage'
+        else if (diff < 1) publishedYear += ' - NEW'
+        return publishedYear
+    }
+
     function loadBook() {
         bookService.get(selectedBookId).then(book => setBook(book))
     }
@@ -33,7 +42,7 @@ export function BookDetails({onSelectBook, selectedBookId}) {
             <h2>{book.title}</h2>
             <h3>{book.subtitle}</h3>
             <p><strong>Author(s):</strong> {book.authors.join(', ')}</p>
-            <p><strong>Published:</strong> {book.publishedDate}</p>
+            <p><strong>Published:</strong> {getPublishDate()}</p>
             <p><strong>Category:</strong> {book.categories.join(', ')}</p>
             <p><strong>Pages:</strong> {book.pageCount}</p>
             <p><strong>Language:</strong> {getBookLng(book.language)}</p>
