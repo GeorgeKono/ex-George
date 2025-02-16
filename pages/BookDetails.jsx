@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js"
+import { LongTxt } from "../cmps/LongTxt.jsx"
 
 const {useState, useEffect} = React
 
@@ -63,6 +64,10 @@ export function BookDetails({onSelectBook, selectedBookId}) {
             <p><strong>Language:</strong> {getBookLng(book.language)}</p>
             <p className={getPriceColor()}><strong>Price:</strong> {book.listPrice.amount} {book.listPrice.currencyCode}</p>
             {book.listPrice.isOnSale && <p className="sale">On Sale!</p>}
+
+            <span className="book-description">
+                <LongTxt txt={book.description} />
+            </span>
 
             <button onClick={() => onSelectBook(null)}>Back</button>
         </section>
